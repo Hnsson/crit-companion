@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Characters from "./pages/Characters";
 import Monsters from "./pages/Monsters";
 import About from "./pages/About";
+import CreateCharacter from "./pages/CreateCharacter";
 
 function App() {
   
@@ -35,6 +36,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/characters" element={<Characters />} />
+        <Route path="/create-character" element={<CreateCharacter />} />
         <Route path="/monsters" element={<Monsters />} />
         <Route path="/about" element={<About />} />
       </Routes>

@@ -1,6 +1,6 @@
 
 use mongodb::{ 
-    bson::{Document, doc},
+    bson::{Document, doc, Bson},
     Client,
     Collection,
     Database,
@@ -29,40 +29,42 @@ async fn get_collection(collection_name: &str) -> Result<Collection<Document>, B
 
 ////////////////////////////////////////// PUBLIC //////////////////////////////////////////////////
 /// Create a character and insert it into the database
-pub async fn create_character(name: &str, alignment: &str, height: i32) -> Result<(), Box<dyn Error>> {
+pub async fn create_character(name: &str, race: &str, class: &str, alignment: &str, height: i32, attributes: Value) -> Result<(), Box<dyn Error>> {
     let collection = get_collection("characters").await?; // Await the Result
+    
+    let attributes_bson: Bson = attributes
+    .try_into()
+    .map_err(|e| format!("Failed to convert attributes to Bson: {}", e))?;
+
     let document = doc! {
         "name": name,
         "alignment": alignment,
-        "height": height
+        "height": height,
+        "race": race,
+        "class": class,
+        "attributes": attributes_bson
     };
     collection.insert_one(document).await?; // Ensure to specify None as the second parameter
     Ok(())
 }
 
-pub async fn get_characters() -> Result<Vec<Value>, Box<dyn Error>> {
+pub async fn get_characters(offset: usize, limit: usize, filter: Option<String>) -> Result<(Vec<Value>, u64), Box<dyn Error>> {
     let collection: Collection<Document> = get_collection("characters").await?;
-    let mut cursor = collection.find(Document::new()).await?; // Corrected: Single argument, empty filter
 
-    let mut documents = Vec::new();
-
-    while let Some(result) = cursor.try_next().await? {
-        let json_value = serde_json::to_value(result)?;
-        documents.push(json_value);
-    }
-
-    Ok(documents)
-}
-
-pub async fn get_character(filter: Value) -> Result<Vec<Value>, Box<dyn Error>> {
-    let collection: Collection<Document> = get_collection("characters").await?;
-    
-    let bson_filter = match serde_json::from_value::<Document>(filter) {
-        Ok(doc) => doc,
-        Err(e) => return Err(Box::new(e))
+    // Create a filter document if there's a filter provided
+    let filter_doc = match filter {
+        Some(f) => doc! { "$or": [
+            { "name": { "$regex": &f, "$options": "i" } },
+            { "race": { "$regex": &f, "$options": "i" } },
+            { "class": { "$regex": &f, "$options": "i" } },
+            { "alignment": { "$regex": &f, "$options": "i" } },
+        ]},
+        None => Document::new(), // No filter if none is provided
     };
 
-    let mut cursor = collection.find(bson_filter).await?;
+    // Adjust the query to include pagination
+    let mut cursor = collection.find(filter_doc.clone()).await?;
+    
     let mut documents = Vec::new();
 
     while let Some(result) = cursor.try_next().await? {
@@ -70,8 +72,15 @@ pub async fn get_character(filter: Value) -> Result<Vec<Value>, Box<dyn Error>> 
         documents.push(json_value);
     }
 
-    Ok(documents)
+    // Return only the requested range of documents
+    let paginated_docs = documents.into_iter().skip(offset).take(limit).collect();
+
+    // Get the total count of matching documents
+    let total_count = collection.count_documents(filter_doc.clone()).await?;
+
+    Ok((paginated_docs, total_count)) // Return paginated documents along with the total count
 }
+
 
 pub async fn get_enemy_characters() -> Result<Vec<Value>, Box<dyn Error>> {
     let collection: Collection<Document> = get_collection("enemy-characters").await?;

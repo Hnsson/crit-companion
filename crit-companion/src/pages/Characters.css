@@ -1,0 +1,113 @@
+.character-container {
+    width: 100%;
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+}
+
+header {
+    margin:20px 0px 0px 20px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.character-search-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.character-search-form input {
+    width: 70%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+}
+
+.character-search-form button {
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+}
+
+.character-search-form button:hover {
+    background-color: #0056b3;
+}
+
+button.disabled {
+    opacity: 0.5; /* Make it semi-transparent */
+    cursor: not-allowed; /* Change cursor to indicate it's disabled */
+    pointer-events: none; /* Prevent any mouse events */
+}
+
+.character-create-btn {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.character-create-btn:hover {
+    background-color: #218838;
+}
+
+.character-list {
+    margin-top: 20px;
+    display: inline-block; /* Allow the table to expand with content */
+}
+
+.character-list table {
+    width: auto; /* Use auto to fit the table width based on content */
+    border-collapse: collapse;
+    margin: 0 auto; /* Center the table */
+}
+
+.character-list th,
+.character-list td {
+    height: 34px;
+    text-align: center; /* Center text in table cells */
+    padding: 8px;
+    border: 1px solid #ddd; /* Optional: add borders to cells */
+}
+
+.character-list th {
+    background-color: #f2f2f2; /* Optional: add a background color for the header */
+}
+
+.character-list tr:nth-child(even) {
+    background-color: #f9f9f9; /* Optional: striping for rows */
+}
+
+.character-pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center vertically */
+    margin-top: 20px;
+}
+
+.character-pagination-controls button {
+    padding: 8px 16px;
+    font-size: 16px;
+    margin: 0 5px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.character-pagination-controls button:hover {
+    background-color: #0056b3;
+}

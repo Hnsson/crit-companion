@@ -6,9 +6,9 @@ use serde_json::Value;
 
 ////////////////////////////////////// TAURI COMMANDS //////////////////////////////////////////////
 #[tauri::command]
-async fn create_character(name: &str, alignment: &str, height: i32) -> Result<String, String> {
+async fn create_character(name: &str, race: &str, class: &str, alignment: &str, height: i32, attributes: Value) -> Result<String, String> {
     // Await the result of create_character and convert errors to strings
-    db_lib::create_character(name, alignment, height)
+    db_lib::create_character(name, race, class, alignment, height, attributes)
         .await
         .map_err(|e| e.to_string())?; // Convert error to String
 
@@ -16,15 +16,8 @@ async fn create_character(name: &str, alignment: &str, height: i32) -> Result<St
 }
 
 #[tauri::command]
-async fn fetch_characters() -> Result<Vec<Value>, String> {
-    db_lib::get_characters()
-        .await
-        .map_err(|e| e.to_string()) // Convert any errors to String
-}
-
-#[tauri::command]
-async fn fetch_character(filter: Value) -> Result<Vec<Value>, String> {
-    db_lib::get_character(filter)
+async fn fetch_characters(offset: usize, limit: usize, filter: Option<String>) -> Result<(Vec<Value>, u64), String> {
+    db_lib::get_characters(offset, limit, filter)
         .await
         .map_err(|e| e.to_string()) // Convert any errors to String
 }
@@ -53,7 +46,6 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             create_character,
             fetch_characters,
-            fetch_character,
             fetch_enemy_characters,
             fetch_enemy_character,
         ])
