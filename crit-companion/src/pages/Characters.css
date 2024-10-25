@@ -1,16 +1,23 @@
 .character-container {
-    width: 100%;
-    text-align: center;
-    display:flex;
+    max-width: 1200px;
+    width:100%;
+    display: flex;
     flex-direction: column;
+    flex-wrap: wrap; /* Allow wrapping */
+    color: #fff;
 }
 
 header {
-    margin:20px 0px 0px 20px;
+    margin:30px 0px;
+    color:white;
+    text-align: center;
 }
 
-h1 {
-    font-size: 24px;
+.character-search {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 20px;
 }
 
@@ -31,15 +38,16 @@ h1 {
 .character-search-form button {
     padding: 8px 16px;
     font-size: 16px;
-    background-color: #007bff;
+    background-color: #dc3545;
     color: #fff;
     border: none;
     cursor: pointer;
     border-radius: 0 4px 4px 0;
+    transition: background-color 0.3s ease;
 }
 
 .character-search-form button:hover {
-    background-color: #0056b3;
+    background-color: #ad1a28;
 }
 
 button.disabled {
@@ -48,30 +56,33 @@ button.disabled {
     pointer-events: none; /* Prevent any mouse events */
 }
 
-.character-create-btn {
-    margin-bottom: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+
+.character-create-btn-p {
+    color:gray;
 }
 
-.character-create-btn:hover {
-    background-color: #218838;
+.character-create-btn {
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    color:rgb(190, 190, 190);
+    cursor: pointer;
+    font-weight: bold;
 }
 
 .character-list {
     margin-top: 20px;
-    display: inline-block; /* Allow the table to expand with content */
+    display: block;
+    overflow-x: auto; /* Allow horizontal scroll if needed */
+    width: 100%; /* Make sure it uses available space */
 }
 
 .character-list table {
-    width: auto; /* Use auto to fit the table width based on content */
+    width: 100%;
     border-collapse: collapse;
-    margin: 0 auto; /* Center the table */
+    min-width: 800px; /* Prevent columns from squishing, adjust as needed */
+    margin: 0 auto;
 }
 
 .character-list th,
@@ -79,15 +90,17 @@ button.disabled {
     height: 34px;
     text-align: center; /* Center text in table cells */
     padding: 8px;
-    border: 1px solid #ddd; /* Optional: add borders to cells */
+    border: 1px solid #5f5f5f; /* Optional: add borders to cells */
 }
 
 .character-list th {
-    background-color: #f2f2f2; /* Optional: add a background color for the header */
+    background-color: #585858; /* Optional: add a background color for the header */
 }
-
+.character-list tr {
+    background-color: rgb(31, 31, 31);
+}
 .character-list tr:nth-child(even) {
-    background-color: #f9f9f9; /* Optional: striping for rows */
+    background-color: rgb(47, 47, 47); /* Optional: striping for rows */
 }
 
 .character-pagination-controls {
@@ -101,7 +114,7 @@ button.disabled {
     padding: 8px 16px;
     font-size: 16px;
     margin: 0 5px;
-    background-color: #007bff;
+    background-color: #dc3545;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -109,5 +122,5 @@ button.disabled {
 }
 
 .character-pagination-controls button:hover {
-    background-color: #0056b3;
+    background-color: #ad1a28;
 }

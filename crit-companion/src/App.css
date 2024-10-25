@@ -9,12 +9,25 @@
   line-height: 24px;
   font-weight: 400;
 
-  color: #0f0f0f;
-  background-color: #f6f6f6;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+
+/* Main container */
+main {
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+  height: 100%;
+}
+
+/* Content area */
+.content {
+  flex: 1; /* Take up remaining space */
+  padding: 20px;
+  overflow: auto; /* Handle any overflow */
+  background-color:rgb(46, 46, 46);
 }

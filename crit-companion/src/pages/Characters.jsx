@@ -7,6 +7,8 @@ import 'react-loading-skeleton/dist/skeleton.css'; // Import skeleton styles
 
 import "./Characters.css";
 
+import BackButton from "../components/BackButton";
+
 function Characters() {
     const [characters, setCharacters] = useState([]);
     const [name, setName] = useState("");
@@ -53,6 +55,9 @@ function Characters() {
 
     return (
         <main className="character-container">
+            {/* Back Button */}
+            <BackButton />
+            {/* Header */}
             <header>
                 <h1>Crit-Companion Character Page</h1>
             </header>
@@ -78,9 +83,12 @@ function Characters() {
                 </form>
     
                 {/* Button to navigate to Create Character Page */}
-                <button className="character-create-btn" onClick={() => navigate("/create-character")}>
-                    Create Your Own Character
-                </button>
+                <p className="character-create-btn-p">
+                    Don't have a character yet? <a className="character-create-btn" href="/create-character">
+                        Create it here!
+                    </a>
+                </p>
+
             </section>
     
             {/* Character List as a Table */}
@@ -101,8 +109,9 @@ function Characters() {
                             <th>CHA</th>
                         </tr>
                     </thead>
+                    <SkeletonTheme baseColor="#333333" highlightColor="#6d6d6d">
                     <tbody>
-                        {loading ? (
+                        {loading ? (                           
                             // Render skeletons when loading
                             Array.from({ length: 10 }).map((_, index) => (
                                 <tr key={index}>
@@ -149,6 +158,7 @@ function Characters() {
                             </tr>
                         )}
                     </tbody>
+                    </SkeletonTheme>
                 </table>
             </section>
     
@@ -170,9 +180,6 @@ function Characters() {
                     Next
                 </button>
             </section>
-    
-            {/* Show loading indicator */}
-            {loading && <p>Loading...</p>}
         </main>
     );
 }

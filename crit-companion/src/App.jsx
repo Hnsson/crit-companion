@@ -32,14 +32,18 @@ function App() {
 
   return (
     <Router>
+      <main>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/characters" element={<Characters />} />
-        <Route path="/create-character" element={<CreateCharacter />} />
-        <Route path="/monsters" element={<Monsters />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/characters" element={<Characters />} />
+            <Route path="/create-character" element={<CreateCharacter />} />
+            <Route path="/monsters" element={<Monsters />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
+        </div>
+      </main>
     </Router>
   );
 }

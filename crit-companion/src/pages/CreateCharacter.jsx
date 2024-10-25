@@ -2,6 +2,8 @@ import { invoke } from "@tauri-apps/api/core";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import BackButton from "../components/BackButton";
+
 import "./CreateCharacter.css";
 
 function CreateCharacter() {
@@ -47,6 +49,7 @@ function CreateCharacter() {
 
     return (
         <main className="container">
+            <BackButton />
             <h1>Create a New Character</h1>
 
             <form
