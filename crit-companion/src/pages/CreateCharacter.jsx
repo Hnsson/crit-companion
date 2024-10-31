@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import BackButton from "../components/BackButton";
+import CharacterHeaderSVG from "../assets/character.svg";
 
 import "./CreateCharacter.css";
 
@@ -48,9 +49,21 @@ function CreateCharacter() {
     };
 
     return (
-        <main className="container">
-            <BackButton />
-            <h1>Create a New Character</h1>
+        <main className="create-character">
+            <header className="create-character-header">
+                <h1>Create a New Character</h1>
+                <div
+                    className="character-header-background"
+                    style={{
+                        backgroundImage: `url(${CharacterHeaderSVG})`,
+                        backgroundPosition: "50% 15%",
+                        backgroundSize: "75%",
+                        backgroundRepeat: "no-repeat",
+                        width: "35%",
+                        height: "100%"
+                    }}
+                />
+            </header>
 
             <form
                 className="character-form"

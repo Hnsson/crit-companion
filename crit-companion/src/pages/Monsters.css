@@ -1,0 +1,144 @@
+.monster-container {
+    max-width: 1200px;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap; /* Allow wrapping */
+    color: #fff;
+}
+
+.monster-container header {
+    margin:30px 0px;
+    color:white;
+    text-align: center;
+}
+
+.monster-search {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.monster-search-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.monster-search-form input {
+    width: 70%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+}
+
+.monster-search-form button {
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+    transition: background-color 0.3s ease;
+}
+
+.monster-search-form button:hover {
+    background-color: #ad1a28;
+}
+
+button.disabled {
+    opacity: 0.5; /* Make it semi-transparent */
+    cursor: not-allowed; /* Change cursor to indicate it's disabled */
+    pointer-events: none; /* Prevent any mouse events */
+}
+
+/* CSS for tooltip */
+.tooltip {
+    position: relative;
+    text-decoration: none;
+  }
+  
+  .tooltip-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+  
+    /* Position the tooltip text */
+    position: absolute;
+    bottom: 100%; /* Position above the link */
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 1;
+  }
+  
+  .tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
+
+.monster-list {
+    margin-top: 20px;
+    display: block;
+    overflow-x: auto; /* Allow horizontal scroll if needed */
+    width: 100%; /* Make sure it uses available space */
+}
+
+.monster-list table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px; /* Prevent columns from squishing, adjust as needed */
+    margin: 0 auto;
+}
+
+.monster-list th,
+.monster-list td {
+    height: 34px;
+    text-align: center; /* Center text in table cells */
+    padding: 8px;
+    border: 1px solid #5f5f5f; /* Optional: add borders to cells */
+}
+    .monster-list td a {
+        color:#dc3545;
+    }
+
+.monster-list th {
+    background-color: #585858; /* Optional: add a background color for the header */
+}
+.monster-list tr {
+    background-color: rgb(31, 31, 31);
+}
+.monster-list tr:nth-child(even) {
+    background-color: rgb(47, 47, 47); /* Optional: striping for rows */
+}
+
+.monster-pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center vertically */
+    margin-top: 20px;
+}
+
+.monster-pagination-controls button {
+    padding: 8px 16px;
+    font-size: 16px;
+    margin: 0 5px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.monster-pagination-controls button:hover {
+    background-color: #ad1a28;
+}

@@ -55,8 +55,6 @@ function Characters() {
 
     return (
         <main className="character-container">
-            {/* Back Button */}
-            <BackButton />
             {/* Header */}
             <header>
                 <h1>Crit-Companion Character Page</h1>
@@ -183,39 +181,5 @@ function Characters() {
         </main>
     );
 }
-
-// TableSkeleton Component
-const TableSkeleton = ({ colCount, rowsCount }) => {
-    const columns = range(colCount).map((i) => {
-        return (
-            <th key={i}>
-                <h1 style={{ margin: "0px" }}>
-                    <Skeleton />
-                </h1>
-            </th>
-        );
-    });
-
-    const rowColumns = range(colCount).map((i) => {
-        return (
-            <td key={i}>
-                <Skeleton />
-            </td>
-        );
-    });
-
-    const rows = range(rowsCount).map((i) => {
-        return <tr key={i}>{rowColumns}</tr>;
-    });
-
-    return (
-        <table width="100%">
-            <thead>
-                <tr>{columns}</tr>
-            </thead>
-            <tbody>{rows}</tbody>
-        </table>
-    );
-};
 
 export default Characters;

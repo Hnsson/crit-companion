@@ -23,18 +23,12 @@ async fn fetch_characters(offset: usize, limit: usize, filter: Option<String>) -
 }
 
 #[tauri::command]
-async fn fetch_enemy_characters() -> Result<Vec<Value>, String> {
-    db_lib::get_enemy_characters()
+async fn fetch_enemy_characters(offset: usize, limit: usize, filter: Option<String>) -> Result<(Vec<Value>, u64), String> {
+    db_lib::get_enemy_characters(offset, limit, filter)
         .await
         .map_err(|e| e.to_string()) // Convert any errors to String
 }
 
-#[tauri::command]
-async fn fetch_enemy_character(filter: Value) -> Result<Vec<Value>, String> {
-    db_lib::get_enemy_character(filter)
-        .await
-        .map_err(|e| e.to_string()) // Convert any errors to String
-}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -47,7 +41,6 @@ pub fn run() {
             create_character,
             fetch_characters,
             fetch_enemy_characters,
-            fetch_enemy_character,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -9,6 +9,7 @@ import Characters from "./pages/Characters";
 import Monsters from "./pages/Monsters";
 import About from "./pages/About";
 import CreateCharacter from "./pages/CreateCharacter";
+import MonsterInfo from "./pages/MonsterInfo";
 
 function App() {
   
@@ -40,6 +41,7 @@ function App() {
             <Route path="/characters" element={<Characters />} />
             <Route path="/create-character" element={<CreateCharacter />} />
             <Route path="/monsters" element={<Monsters />} />
+            <Route path="/monster/:param" element={<MonsterInfo />} />
             <Route path="/about" element={<About />} />
           </Routes>
         </div>
