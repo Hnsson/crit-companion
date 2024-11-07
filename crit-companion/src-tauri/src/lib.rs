@@ -29,6 +29,12 @@ async fn fetch_enemy_characters(offset: usize, limit: usize, filter: Option<Stri
         .map_err(|e| e.to_string()) // Convert any errors to String
 }
 
+#[tauri::command]
+async fn fetch_enemy_character_by_id(id: &str) -> Result<Value, String> {
+    db_lib::get_enemy_character_by_id(id)
+        .await
+        .map_err(|e| e.to_string()) // Convert any errors to String
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -41,6 +47,7 @@ pub fn run() {
             create_character,
             fetch_characters,
             fetch_enemy_characters,
+            fetch_enemy_character_by_id
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -95,7 +95,7 @@ button:hover {
     background-color: #0056b3; /* Darker blue on hover */
 }
 
-h3 {
+.character-form h3 {
     margin-top: 20px;
     margin-bottom: 10px;
     font-size: 18px;

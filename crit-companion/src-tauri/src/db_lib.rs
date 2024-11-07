@@ -1,6 +1,6 @@
 
 use mongodb::{ 
-    bson::{Document, doc, Bson},
+    bson::{Document, doc, Bson, oid::ObjectId},
     Client,
     Collection,
     Database,
@@ -113,6 +113,23 @@ pub async fn get_enemy_characters(offset: usize, limit: usize, filter: Option<St
     let total_count = collection.count_documents(filter_doc.clone()).await?;
 
     Ok((paginated_docs, total_count)) // Return paginated documents along with the total count
+}
+
+pub async fn get_enemy_character_by_id(id: &str) -> Result<Value, Box<dyn Error>> {
+    let collection: Collection<Document> = get_collection("enemy-characters").await?;
+
+    let object_id = ObjectId::parse_str(id)?;
+
+    let filter = doc! { "_id": object_id };
+    let result = collection.find_one(filter).await?;
+    
+    match result {
+        Some(doc) => {
+            let json_value = serde_json::to_value(doc)?;
+            Ok(json_value)
+        },
+        None => Err("No document found with the provided ID".into()),
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
