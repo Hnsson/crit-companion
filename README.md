@@ -92,15 +92,3 @@ Additionally, install the prerequisites for your operating system as described o
 
 - **Additional Monster Filters:**
   - Filter monsters by attributes such as challenge rating, type, or environment.
-
----
-
-## Feedback and Contributions
-
-We welcome feedback and contributions! Feel free to open an issue or submit a pull request on GitHub.
-
----
-
-## License
-
-This project is licensed under [LICENSE_NAME]. See the `LICENSE` file for details.
