@@ -7,8 +7,6 @@ import 'react-loading-skeleton/dist/skeleton.css'; // Import skeleton styles
 
 import "./Monsters.css";
 
-import BackButton from "../components/BackButton";
-
 function Monsters() {
     const [monsters, setMonsters] = useState([]);
     const [name, setName] = useState("");
